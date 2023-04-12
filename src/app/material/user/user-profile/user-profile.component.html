@@ -1,0 +1,142 @@
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile>
+    <mat-card class="example-card" *ngIf="email == null">
+      <mat-card-header class="card-header">
+        <mat-card-title class="card-title">My Profile</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div>
+          <p>Name:&nbsp;&nbsp;{{ user.name }}</p>
+          <p>Email:&nbsp;&nbsp;{{ user.email }}</p>
+          <p>PhoneNumber:&nbsp;&nbsp;{{ user.phoneNumber }}</p>
+          <p>Address:&nbsp;&nbsp;{{ user.address }}</p>
+          <p *ngIf="currentUserRole != '0'">
+            Reference:&nbsp;&nbsp;{{ user.reference }}
+          </p>
+          <p *ngIf="currentUserRole != '0'">
+            Organisation:&nbsp;&nbsp;{{ organisation.orgCom }}
+          </p>
+          <p *ngIf="currentUserRole != '3'">
+            Commission:&nbsp;&nbsp;{{ userCommission }}
+          </p>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <!-- <button  class="btn btn-primary"  (click)="openDialog()">
+          Click to open pop up
+        </button> -->
+        <button mat-raised-button color="warn" (click)="editProfile()">
+          Edit Profile
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="releaseOrg()"
+          *ngIf="currentUserRole == '1' && release == true"
+        >
+          Release Request
+        </button>
+        <button
+          mat-raised-button
+          disabled
+          *ngIf="currentUserRole == '1' && release != true"
+        >
+          Release Request
+        </button>
+        <button
+          mat-raised-button
+          disabled
+          *ngIf="currentUserRole == '1' && shareAval != true"
+        >
+          10% Share
+        </button>
+        <button
+          (click)="deployShare()"
+          mat-raised-button
+          color="primary"
+          *ngIf="currentUserRole == '1' && shareAval == true"
+        >
+          10% Share
+        </button>
+        <button
+          (click)="shareRelease()"
+          mat-raised-button
+          color="primary"
+          *ngIf="currentUserRole == '1' && shareReleaseStatus == true"
+        >
+          Release Shares
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="example-card" *ngIf="email != null">
+      <mat-card-header class="card-header">
+        <mat-card-title>Edit Profile</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field appearance="fill" class="example-form-field">
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            class="text-danger"
+            placeholder="Enter your name"
+            name="name"
+            type="text"
+            [(ngModel)]="user.name"
+          />
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <mat-form-field appearance="fill" class="example-form-field">
+          <mat-label>Address</mat-label>
+          <input
+            matInput
+            placeholder="Enter your address"
+            name="address"
+            type="text"
+            [(ngModel)]="user.address"
+          />
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <mat-form-field appearance="fill" class="example-form-field">
+          <mat-label>Phone Nummber</mat-label>
+          <input
+            matInput
+            placeholder="Enter your Phonenumber"
+            name="phoneNumber"
+            type="text"
+            [(ngModel)]="user.phoneNumber"
+          />
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <mat-form-field appearance="fill" class="example-form-field">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            placeholder="Enter your password"
+            name="password"
+            type="text"
+            [(ngModel)]="user.password"
+          />
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="updateProfile()">
+          Update Profile
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile *ngIf="timer!=null  && timerExpired!=true">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Your Win Bid</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><b>{{ countDown.hrs + " : " + countDown.mins + " : " + countDown.secs }}</b></p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="purchaseWinBid()">Purchase Bid</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile> 
+</mat-grid-list>

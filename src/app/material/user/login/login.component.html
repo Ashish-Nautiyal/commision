@@ -1,0 +1,39 @@
+<mat-card class="example-card">
+    <mat-card-header class="card-header">
+      <mat-card-title>Login Form</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field appearance="fill" class="example-form-field">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          placeholder="Enter your email"
+          name="email"
+          type="text"
+          [(ngModel)]="newLogin.email"
+        />
+      </mat-form-field>
+      <mat-divider></mat-divider>
+      <mat-form-field appearance="fill" class="example-form-field">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          placeholder="Enter your password"
+          name="password"
+          type="password"
+          [(ngModel)]="newLogin.password"
+        />
+      </mat-form-field>
+      <mat-divider></mat-divider>
+      <p>{{message}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)="login()" mat-raised-button color="primary">
+        Login
+      </button>
+      <button (click)="signUp()" mat-raised-button color="primary">
+        Sign Up
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  

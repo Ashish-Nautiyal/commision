@@ -1,0 +1,49 @@
+<mat-toolbar color="primary">
+  <!-- Menu -->
+  <button
+    mat-icon-button
+    class="example-icon"
+    [matMenuTriggerFor]="menu"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <!-- Menu List -->
+  <mat-menu #menu="matMenu">
+    <a routerLink="myProfile"><button mat-menu-item mat-raised-button >My Profile</button></a> 
+    <a routerLink="myShares"><button mat-menu-item mat-raised-button >My Shares</button></a> 
+    <a routerLink="userList"><button mat-menu-item mat-raised-button>User's List</button></a>   
+    <a routerLink="share"><button mat-menu-item mat-raised-button>Share</button></a>
+    <a routerLink="biding"><button mat-menu-item mat-raised-button>Biding</button></a>
+
+  </mat-menu>
+  <span class="example-spacer">My App</span>
+
+  <div>
+    <a routerLink="register"
+      ><button
+        class="registerBtn"
+        mat-raised-button
+        *ngIf="userEmail == null"
+      >
+        Register
+      </button></a
+    >
+    <a routerLink="/login"
+      ><button class="loginBtn" mat-raised-button *ngIf="userEmail == null">
+        Login
+      </button></a
+    >
+    <a routerLink="/login"
+      ><button
+        (click)="logout()"
+        class="logoutBtn"
+        mat-raised-button
+        *ngIf="userEmail != null"
+      >
+        LogOut
+      </button></a
+    >
+  </div>
+</mat-toolbar>
+<app-root></app-root>

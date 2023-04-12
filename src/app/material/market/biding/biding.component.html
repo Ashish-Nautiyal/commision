@@ -1,0 +1,139 @@
+<mat-grid-list
+  cols="2"
+  rowHeight="2:1"
+  *ngFor="let bid of bidsList; let i = index"
+>
+  <mat-grid-tile>
+    <mat-card class="example-card">
+      <mat-card-header class="card-header">
+        <mat-card-title></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Bid Detail</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Organisation</td>
+                <td>{{ orgNames[i] | uppercase }}</td>
+              </tr>
+              <tr>
+                <td>Share Holder</td>
+                <td>{{ bid.user_email }}</td>
+              </tr>
+              <tr>
+                <td>Total Share</td>
+                <td>{{ bid.share_percentage }}</td>
+              </tr>
+              <tr>
+                <td>Share Price</td>
+                <td>{{ bid.share_price }}</td>
+              </tr>
+              <tr>
+                <td>Minimum Bid</td>
+                <td>{{ bid.share_price * bid.share_percentage }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+
+   <!--  bid started -->
+  <mat-grid-tile>   
+    <mat-card class="example-card" *ngIf="stopTimer[i] == false">
+      <mat-card-header class="card-header">
+        <mat-card-title></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Bid</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Countdown</td>
+                <td>{{ hrs[i] + " : " + mins[i] + " : " + secs[i] }}</td>
+              </tr>
+              <tr *ngIf="highestBid[i].bidprice != 0">
+                <td></td>
+                <td>{{ highestBid[i].name }}</td>
+              </tr>
+              <tr>
+                <td>Highest Bid</td>
+                <td>{{ highestBid[i].bidprice }}</td>
+              </tr>
+              <tr>
+                <td>Your Bid</td>
+                <td>
+                  <input
+                    (keydown)="getTextValue($event, i)"
+                    [disabled]="bid.user == false"
+                    type="number"
+                    name="myBid"
+                    [(ngModel)]="myBid[i]"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button
+                    mat-raised-button
+                    [disabled]="bid.user == false"
+                    color="primary"
+                    (click)="buyBid(bid, i)"
+                  >
+                    Submit Bid
+                  </button>
+                </td>
+                <td>
+                  <button
+                    mat-raised-button
+                    color="secondary"
+                    (click)="intializeClock(timer[i], i)"
+                  >
+                    Remaining Time
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- bid closed -->
+    <mat-card class="example-card" *ngIf="stopTimer[i] == true">
+      <mat-card-header class="card-header">
+        <mat-card-title>Bid Closed</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div>
+          <table>
+            <thead>
+              <th>Winner</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Name</td>
+                <td>{{ highestBid[i].name }}</td>
+              </tr>
+              <tr>
+                <td> Highest Bid</td>
+                <td>{{ highestBid[i].bidprice }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

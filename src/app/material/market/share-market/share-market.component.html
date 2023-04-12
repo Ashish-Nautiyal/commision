@@ -1,0 +1,47 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>S.No.</th>
+        <th>Organisation Name</th>
+        <th>Share price</th>
+        <th>Total Share</th>
+        <th>Share Available</th>
+        <th>Total Amount</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let share of shares; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ orgNames[i] | uppercase }}</td>
+        <td>Rs.{{ share.share_prize }}</td>
+        <td>{{ share.total_share }}%</td>
+        <td>{{ share.remaining_share }}%</td>
+        <td>
+          <input
+            type="text"
+            disabled
+            value="{{ share.share_prize * selected[i] }}"
+          />
+        </td>
+        <td>
+          <select (change)="onChange($event,i)">
+            <option value="0">Share %</option>
+            <option *ngFor="let a of share.new" value="{{a}}">{{a}}%</option>
+          </select>
+        </td>
+        <td>
+          <button
+            (click)="buyShares(share.org_id,i)"
+            mat-raised-button
+            color="primary"
+          >
+            Buy Share
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>

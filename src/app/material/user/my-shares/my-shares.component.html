@@ -1,0 +1,39 @@
+<table>
+    <thead>
+      <tr>
+        <th>S.No.</th>
+        <th>Organisation Name</th>
+        <th>Total Shares</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let share of myShares; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ orgNames[i] }}</td> 
+        <td>{{ share.share_percentage }}%</td>
+        <td>
+          <select name="selected" (change)="onChange($event)">
+            <option value="0">share %</option>
+            <option *ngFor="let a of share.new" value="{{ a }}">
+              {{ a }}
+            </option>
+          </select>
+        </td>
+        <td>
+          <button
+            (click)="addBid(share.org_id)"
+            mat-raised-button
+            color="primary"
+          >
+            Biding
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div>
+    <input type="text" name="txt" [(ngModel)]="message" (change)="onClick($event)" />
+    <!-- <input type="button" name="btn" (click)="onClick(message)">     -->
+  </div>

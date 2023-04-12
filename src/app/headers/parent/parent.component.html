@@ -1,0 +1,4 @@
+<h1>Parent Component</h1>
+<p>From Child : {{receieved}}</p>
+<button (click)="update()">Set</button>
+<app-child [Name]="name"  (nameChange)="recieveData($event)"></app-child>

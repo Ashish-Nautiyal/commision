@@ -1,0 +1,172 @@
+<section *ngIf="id == null">
+  <div>
+    <h2>User type</h2>
+  </div>
+  <div class="button-row">
+    <button mat-raised-button color="primary" (click)="getForm(1)">
+      Admin
+    </button>
+    <button mat-raised-button color="accent" (click)="getForm(2)">Agnet</button>
+    <button mat-raised-button color="warn" (click)="getForm(3)">User</button>
+  </div>
+</section>
+
+
+<section *ngIf="id != null">
+  <form [formGroup]="registrationForm" (ngSubmit)="register()">
+    <div>
+      <div>
+        <label>Name </label>
+      </div>
+      <input type="text" formControlName="name" />
+      <span
+        *ngIf="
+          registrationForm.controls['name'].touched &&
+          registrationForm.controls['name'].invalid
+        "
+        style="color: red"
+        >*Name empty!!!</span
+      >
+    </div>
+
+    <div>
+      <div>
+        <label>Address</label>
+      </div>
+      <input type="text" formControlName="address" />
+      <span
+        *ngIf="
+          registrationForm.controls['address'].touched &&
+          registrationForm.controls['address'].invalid
+        "
+        style="color: red"
+        >*Address empty!!!</span
+      >
+    </div>
+
+      <div>       
+        <div>
+          <label>Phone Number</label>
+        </div> 
+        <input type="text" formControlName="phoneNumber" />
+          <span
+            *ngIf="
+              registrationForm.controls['phoneNumber'].touched &&
+              registrationForm.controls['phoneNumber'].invalid
+            "
+            style="color: red"
+            >*phone empty!!!</span
+          >     
+      </div>
+
+      <div>
+        <div>
+          <label>Email</label>
+        </div>
+        <input type="text" formControlName="email" />
+        <span
+          *ngIf="
+            registrationForm.controls['email'].touched &&
+            registrationForm.controls['email'].invalid
+          "
+          style="color: red"
+          >*Email empty!!!</span
+        >
+      </div>
+
+      <div>
+        <div>
+          <label>Password</label>
+        </div>
+        <input type="text" formControlName="password" />
+        <span
+          *ngIf="
+            registrationForm.controls['password'].touched &&
+            registrationForm.controls['password'].invalid
+          "
+          style="color: red"
+          >*Password empty!!!</span
+        >
+      </div>
+
+
+
+      <div *ngIf="id == 2">
+        <div>
+          <label>Select Admin</label>
+        </div>
+        <select formControlName="reference">
+          <option value="">Select Admin</option>
+          <option *ngFor="let admin of adminList" value="{{ admin.email }}">
+            {{ admin.name }}
+          </option>
+        </select>
+        <span
+          *ngIf="
+            registrationForm.controls['reference'].touched &&
+            registrationForm.controls['reference'].invalid
+          "
+          style="color: red"
+          >*Choose Your Admin!!!</span
+        >
+      </div>
+
+
+      <div *ngIf="id == 3">
+        <div>
+          <label>Select Agent</label>
+        </div>
+        <select formControlName="reference">
+          <option value="">Select Agent</option>
+          <option *ngFor="let agent of agentList" value="{{ agent.email }}">
+            {{ agent.name }}
+          </option>
+        </select>
+        <span
+          *ngIf="
+            registrationForm.controls['reference'].touched &&
+            registrationForm.controls['reference'].invalid
+          "
+          style="color: red"
+          >*Choose Your Agent!!!</span
+        >
+      </div>
+
+      
+      <div *ngIf="id == 1">
+        <div>
+          <label>Organisation</label>
+        </div>        
+        <input type="text" formControlName="org" />
+        <span
+          *ngIf="
+            registrationForm.controls['org'].touched &&
+            registrationForm.controls['org'].invalid
+          "
+          style="color: red"
+          >*Organisation empty!!!</span
+        >
+      </div>
+
+      <div>
+        <div>
+          <label>Role</label>
+        </div>    
+        <input type="text" value="{{ id }}" formControlName="role" />
+        <span
+          *ngIf="
+            registrationForm.controls['role'].touched &&
+            registrationForm.controls['role'].invalid
+          "
+          style="color: red"
+          >*Role empty!!!</span
+        >
+      </div>
+     
+      <div>
+        <button type="submit" [disabled]="registrationForm.invalid">
+          Registration
+        </button>
+      </div>
+  </form>
+</section>
