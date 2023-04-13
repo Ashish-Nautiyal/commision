@@ -32,7 +32,7 @@ server.on("connection", (socket) => {
   });
 
 });
-
+mongoose.set('strictQuery', false);
 mongoose.connect(process.env.DB_URL, () => {
   console.log("Db connected");
 });
